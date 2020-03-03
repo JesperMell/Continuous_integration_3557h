@@ -40,3 +40,7 @@ These are suggestions on assignments which your group may choose.
   - Commands for storing and retrieving data from files
   - Login
   - Add user/remove user
+
+
+C test workflow badge:
+![C/C++ CI](https://github.com/JesperMell/Continuous_integration_3557h/workflows/C/C++%20CI/badge.svg)
