@@ -9,11 +9,20 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+    - name: echo
+      run: echo 'Something was pushed'
+      
+
+# Below is some stuff from my example and also not from my example.
+#    - name: kompilera
+#      run: gcc main.c -o main
+#    - name: run_program
+#      run: ./main
+#    - name: configure
+#      run: ./configure
+#    - name: make
+#      run: make
+#    - name: make check
+#      run: make check
+#    - name: make distcheck
+#      run: make distcheck
