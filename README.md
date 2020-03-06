@@ -40,6 +40,17 @@ These are suggestions on assignments which your group may choose.
   - Commands for storing and retrieving data from files
   - Login
   - Add user/remove user
+  
+ 
+ ## Workflow (Priorites)
+ 
+ - High level Reqs
+ - Workflow
+ - CI + makefile
+ - Continues Delivery
+ - Low Level Requirements
+ - Developing
+ - Expanding the application
 
 
 C test workflow badge:
