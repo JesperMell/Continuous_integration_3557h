@@ -39,10 +39,10 @@ On push to master:
 * some instructions for installing and using the software.
 
 a configfile containing:
-	wifi name.
-	wifi password.
-	pin on esp32 that led is connected to.
-	ip adress to esp32.
+	wifi name.\
+	wifi password.\
+	pin on esp32 that led is connected to.\
+	ip adress to esp32.\
 
 it should add a git hub tag (eg. v0.1)
 
