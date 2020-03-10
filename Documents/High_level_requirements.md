@@ -84,11 +84,11 @@ Test esp32 sw, the functional code.
 *This project should rely on one or more makefiles to compile the code and run tests*.\
 different targets in the makefile (flags). make one large make file.\
 
-checkhw(esp32 tests)
-checksw(REST and other python tests)
-all (Build all)
-dist (zip all, there is a way of doing it in yml, but easier to test it if you have a make file).
-clean (Clean and tidy up from old folders and files that does not need to exist anymore).
+*checkhw(esp32 tests)
+*checksw(REST and other python tests)
+*all (Build all)
+*dist (zip all, there is a way of doing it in yml, but easier to test it if you have a make file).
+*clean (Clean and tidy up from old folders and files that does not need to exist anymore).
 
 The makefile should compile the program and all its dependencies using platform IO or equivalent.\
 
