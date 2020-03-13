@@ -8,10 +8,11 @@ app=Flask(__name__)
 
 @app.route("/on")
 def on():
-    r = requests.get(url = "http://167.172.62.61:3000") 
+    r = requests.get(url = "http://167.172.62.61:3000/turn_on.php")
     return r.text
 
 @app.route("/off")
 def off():
-    return 'Goodbye Linus'
+    r = requests.get(url = "http://167.172.62.61:3000/turn_off.php")
+    return r.text
     
