@@ -1,0 +1,53 @@
+# High level requirements
+
+*The focus of the assignment is on the testing, CI, CD and Makefiles.
+The project shall use automatic tests, CI, CD, Makefiles and at least some tests
+writen in Python. Start with an empty main (or something simple like a print out
+to see that it is running) and then continue with CI/CD and Makefile.
+Start implementing features by writing test cases and then write the code.*
+
+## Contenious integration
+*This project should rely on git hub actions for contenious integration*
+
+## Contenious deployment
+*This project should rely on git hub actions for contenious deployment*
+
+## Automatic tests
+Some tests should run
+
+### Tests using python
+
+*Some tests should use python.*
+
+Theese tests are the ones that run with git hub actions.
+Tests should be added in the list below.
+
+* The code should run.
+* The program should exit without any errors.
+
+
+### Tests using C
+
+*Some tests should use unity in C.*
+
+Theese tests should use Unity in a separate test file.
+Tests should be added in the list below.
+
+* The code should compile.
+* The code should exit without any errors.
+
+
+
+## Makefiles
+
+*This project should rely on one or more makefiles to compile and run tests*.
+
+
+---
+
+###### Version table.
+Version |Description |Signed | Date
+|---|		 ---|	 ---|	 ---|
+|	|			|		|		|
+|	|			|		|		|
+|V0.1|Initial structure created	|Lila|2020-03-06|

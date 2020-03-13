@@ -1,4 +1,8 @@
 # Continuous_integration_3557h
+## Related documents:
+- Workflow: https://docs.google.com/document/d/1b-6UkOfVD8PuoY2AAAMQrq8wWzIracWZjEjaBTX_6nA/edit#
+
+
 ## By the incredibles
 The focus of the assignment is on the testing, CI, CD and Makefiles.
 The project shall use automatic tests, CI, CD, Makefiles and at least some tests
