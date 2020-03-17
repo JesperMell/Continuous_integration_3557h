@@ -70,7 +70,7 @@ $(UNITY_TARGET): $(UNITYOBJ)
 
 build/%.o: %.c
 	@[ -e $(dir $@) ] || mkdir -p $(dir $@) # Create build directory if it does not exist
-	$(CC) -c -o $@ $<
+	$(CC) -c -o $@ -I $(UNITYFOLDER) $<
 
 unity: $(TARGET_UNITY)
 
