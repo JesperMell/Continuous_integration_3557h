@@ -18,11 +18,11 @@ UNITYFOLDER = ./testmake/unity
 # Generated variables #
 #######################
 
-SRC = hello.c main.c
+SRC = ./testmake/hello.c ./testmake/main.c
 OBJ = $(SRC:%.c=$(BUILD)/%.o)
 TARGET_BINARY = $(BUILD)/$(BINARY)
 
-TESTSRC= hello.c test.c
+TESTSRC= ./testmake/hello.c ./testmake/test.c
 TESTOBJ = $(TESTSRC:%.c=$(BUILD)/%.o)
 TARGET_TEST = $(BUILD)/$(TEST)
 
