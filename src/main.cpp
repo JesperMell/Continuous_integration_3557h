@@ -2,17 +2,18 @@
 #include <WiFi.h>
 #include <ESPAsyncWebServer.h>
 
-const char *ssid = "ENTER SSID";
-const char *password = "ENTER PASSWORD";
-const int pin = 13;
+extern const char *ssid = "ENTER SSID";
+extern const char *password = "ENTER PASSWORD";
+extern const int pin = 13;
 
 AsyncWebServer server(3000);
 
 void setup()
 {
   Serial.begin(9600);
-
   WiFi.begin(ssid, password);
+  pinMode(pin, OUTPUT);
+  server.begin();
 
   while (WiFi.status() != WL_CONNECTED)
   {
@@ -21,8 +22,6 @@ void setup()
   }
 
   Serial.println(WiFi.localIP());
-
-  digitalWrite(pin, HIGH);
 
   server.on("/turn_on", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(200, "text/plain", "Turning on the light");
@@ -35,9 +34,8 @@ void setup()
     Serial.println("Turning off the LED");
     digitalWrite(pin, LOW);
   });
-
-  server.begin();
-  pinMode(pin, OUTPUT);
 }
 
-void loop() {}
+void loop()
+{
+}

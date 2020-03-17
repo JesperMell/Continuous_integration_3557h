@@ -6,11 +6,12 @@ DEFAULT_VARIABLES := $(.VARIABLES)
 
 CC = gcc
 LD = gcc
-BINARY = hello
-BUILD = build
-TEST = test
-UNITY = unity
-UNITYFOLDER = ./unity
+BINARY = ./testmake/hello
+BUILD = ./testmake/build
+TEST = ./testmake/test
+UNITY = ./testmake/unity
+UNITYFOLDER = ./testmake/unity
+
 
 
 #######################
