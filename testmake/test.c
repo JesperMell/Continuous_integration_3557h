@@ -12,13 +12,6 @@ void tearDown(void)
 }
 void test_printf(void)
 {
-    /*     buffer = (char *)malloc(sizeof(char) * 12);
-    if (buffer == NULL)
-    {
-        printf("felfelfelfelfel");
-        exit - 1;
-    } */
-
     hello(buffer);
     TEST_ASSERT_EQUAL_STRING("Hello World!", buffer);
 }
