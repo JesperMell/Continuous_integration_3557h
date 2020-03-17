@@ -10,7 +10,7 @@ BINARY = hello
 BUILD = build
 TEST = test
 UNITY = unity
-UNITYFOLDER = ./testmake/unity
+UNITYFOLDER = ./unity
 
 
 
@@ -70,7 +70,7 @@ $(UNITY_TARGET): $(UNITYOBJ)
 
 build/%.o: %.c
 	@[ -e $(dir $@) ] || mkdir -p $(dir $@) # Create build directory if it does not exist
-	$(CC) -c -o $@ -I $(UNITYFOLDER) $<
+	$(CC) -c -o $@ -I /testmake$(UNITYFOLDER) $<
 
 unity: $(TARGET_UNITY)
 
