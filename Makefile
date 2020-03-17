@@ -44,8 +44,8 @@ clean:
 	rm -rf $(UNITYOBJ)
 	rm -rf $(TARGET_TEST)
 	rm -rf $(TESTOBJ)
-	rm -f $(BUILD)/$(UNITYFOLDER)
-	
+
+	rm -df $(BUILD)/$(UNITYFOLDER)
 	rm -df $(dir $(OBJ))
 	rm -df $(BUILD)
 	rm -df $(UNITY)
