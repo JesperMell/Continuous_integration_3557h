@@ -38,12 +38,12 @@ UNITY_TARGET = $(BUILD)/$(UNITYFOLDER)/$(UNITY)
 all: $(TARGET_BINARY)
 
 clean:
-	rm -f $(TARGET_BINARY)
-	rm -f $(OBJ)
-	rm -f $(UNITY_TARGET)
-	rm -f $(UNITYOBJ)
-	rm -f $(TARGET_TEST)
-	rm -f $(TESTOBJ)
+	rm -rf $(TARGET_BINARY)
+	rm -rf $(OBJ)
+	rm -rf $(UNITY_TARGET)
+	rm -rf $(UNITYOBJ)
+	rm -rf $(TARGET_TEST)
+	rm -rf $(TESTOBJ)
 	
 	rm -df $(dir $(OBJ))
 	rm -df $(BUILD)
