@@ -49,6 +49,10 @@ clean:
 	rm -df $(UNITY)
 	
 
+####################
+# Actually do this #
+####################
+
 $(TARGET_BINARY): $(OBJ)
 	$(LD) -o $(TARGET_BINARY) $(OBJ) #länkar alla objektfiler till en exekverbar binärfil
 
@@ -57,6 +61,11 @@ $(TARGET_TEST): $(TESTOBJ) $(UNITY_TARGET)
 
 $(UNITY_TARGET): $(UNITYOBJ)
 	ar rcs $(UNITY_TARGET) $(UNITYOBJ)
+
+################
+# More targets #
+################
+
 
 build/%.o: %.c
 	@[ -e $(dir $@) ] || mkdir -p $(dir $@) # Create build directory if it does not exist
