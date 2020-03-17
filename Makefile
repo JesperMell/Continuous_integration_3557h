@@ -9,7 +9,7 @@ LD = gcc
 BINARY = hello
 BUILD = build
 TEST = test
-UNITY = unity
+UNITY = libunity.a
 UNITYFOLDER = ./testmake/unity
 
 
