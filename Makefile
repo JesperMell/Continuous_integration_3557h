@@ -10,7 +10,7 @@ BINARY = hello
 BUILD = build
 TEST = test
 UNITY = unity
-UNITYFOLDER = ./unity
+UNITYFOLDER = ./testmake/unity
 
 
 
