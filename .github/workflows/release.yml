@@ -31,6 +31,7 @@ jobs:
     - name: Create archive
       shell: bash
       run: |
+        ls -la
         mkdir artifact
         7z a -r artifact/artifact.zip ./testmake/*
         
