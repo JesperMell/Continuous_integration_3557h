@@ -14,7 +14,7 @@ jobs:
     steps:        
     - name: Create Release
       id: create_release
-      uses: actions/create-release@v1
+      uses: actions/create-release@create_release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
@@ -35,7 +35,6 @@ jobs:
 #        mkdir artifact
 #        7z a -r artifact/artifact.zip ./src
 #        - uses: actions/checkout@master
-    - uses: actions/checkout@create_release
     - name: Archive Release
       uses: thedoctor0/zip-release@master
       with:
