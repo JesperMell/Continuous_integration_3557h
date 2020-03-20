@@ -27,15 +27,20 @@ jobs:
       id: get_version
       shell: bash
       run: echo ::set-output name=version::$(git name-rev --name-only --tags HEAD)
+    
+    - name: Zip Folder
+      uses: actions/checkout@v1
+      run: zip -r release.zip .
 
 # Funkar inte
 
-    - name: Create archive
-      shell: bash
-      run: |
-        mkdir artifact
-        7z a -r artifact/artifact.zip ./src
-        - uses: actions/checkout@master
+#    - name: Create archive
+#      shell: bash
+#      run: |
+#        echo ls
+#        mkdir artifact
+#        7z a -r artifact/artifact.zip ./src
+#        - uses: actions/checkout@master
 
 # Funkar inte
 
