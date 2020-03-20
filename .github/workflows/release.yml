@@ -37,6 +37,7 @@ jobs:
 #        - uses: actions/checkout@master
         
     - name: Archive Release
+      uses: thedoctor0/zip-release@master
       with:
         filename: 'release.zip'
         
