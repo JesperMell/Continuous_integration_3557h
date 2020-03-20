@@ -20,8 +20,8 @@ jobs:
       with:
         tag_name: ${{ github.ref }}
         release_name: Release ${{ github.ref }}
-        draft: true
-        prerelease: true
+        draft: false
+        prerelease: false
         
     - name: Get version
       id: get_version
@@ -34,8 +34,6 @@ jobs:
     - name: Release to Github
       run: echo "Release"
 
-    - name: echo
-      run: ls -al
         
     - name: Upload release asset
       uses: actions/upload-release-asset@v1.0.1
