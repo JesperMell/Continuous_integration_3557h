@@ -23,7 +23,7 @@ class TestSenderRequests(unittest.TestCase):
         sender = Sender()
         sender.url = "http://test.invalid"
 
-        self.assertEqual(sender.on(), "Turned Omn")
+        self.assertEqual(sender.on(), "Turned On")
 
     @mock.patch("requests.get", side_effect=mocked_esp_request)
     def test_off_1(self, mock_get):
