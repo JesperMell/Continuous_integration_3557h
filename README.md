@@ -62,3 +62,6 @@ C test workflow badge:
 
 python workflow badge:
 ![Python application](https://github.com/JesperMell/Continuous_integration_3557h/workflows/Python%20application/badge.svg)
+
+## Contributors
+Jesper Mellquist
