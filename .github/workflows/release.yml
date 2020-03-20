@@ -10,17 +10,15 @@ name: Create Release
 
 on:
   push:
-    branches: [ master ]
+    branches: [ create_release ]
   pull_request:
-    branches: [ master ]
->>>>>>> d392d5a206a9e7c8b32a93534dbf611ec17e9f51
+    branches: [ create_release ]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
     
-<<<<<<< HEAD
     steps:
     - uses: actions/checkout@master
     - name: make
@@ -30,7 +28,6 @@ jobs:
       
 =======
     steps:        
->>>>>>> d392d5a206a9e7c8b32a93534dbf611ec17e9f51
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -46,20 +43,13 @@ jobs:
       id: get_version
       shell: bash
       run: echo ::set-output name=version::$(git name-rev --name-only --tags HEAD)
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> d392d5a206a9e7c8b32a93534dbf611ec17e9f51
     - name: Create archive
       shell: bash
       run: |
         mkdir artifact
         7z a artifact/artifact.zip ./build/hello
-<<<<<<< HEAD
-
-=======
->>>>>>> d392d5a206a9e7c8b32a93534dbf611ec17e9f51
+        
     - name: Upload release asset
       uses: actions/upload-release-asset@v1.0.1
       env:
