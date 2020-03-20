@@ -28,11 +28,17 @@ jobs:
       shell: bash
       run: echo ::set-output name=version::$(git name-rev --name-only --tags HEAD)
 
-    - name: Create archive
-      shell: bash
-      run: |
-        mkdir artifact
-        7z a -r artifact/artifact.zip ./src
+#    - name: Create archive
+#      shell: bash
+#      run: |
+#        echo ls
+#        mkdir artifact
+#        7z a -r artifact/artifact.zip ./src
+#        - uses: actions/checkout@master
+        
+    - name: Archive Release
+      with:
+        filename: 'release.zip'
         
     - name: Upload release asset
       uses: actions/upload-release-asset@v1.0.1
