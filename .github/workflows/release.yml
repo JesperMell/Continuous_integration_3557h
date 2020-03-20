@@ -27,11 +27,12 @@ jobs:
       id: get_version
       shell: bash
       run: echo ::set-output name=version::$(git name-rev --name-only --tags HEAD)
-    
-    - name: Zip Folder
-      uses: actions/checkout@v1
-      run: zip -r release.zip .
 
+    - uses: actions/checkout@v1
+    - name: Zip Folder
+      run: zip -r release.zip .
+    - name: Release to Github
+      run: echo "Release"
 # Funkar inte
 
 #    - name: Create archive
