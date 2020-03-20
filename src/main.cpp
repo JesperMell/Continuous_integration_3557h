@@ -1,11 +1,12 @@
-#include <Arduino.h>
-#include <WiFi.h>
-#include <ESPAsyncWebServer.h>
+// main.cpp
+
+#include "header.h"
 
 extern const char *ssid = "ENTER SSID";
 extern const char *password = "ENTER PASSWORD";
 extern const int pin = 13;
 
+boolean check = false;
 AsyncWebServer server(3000);
 
 void setup()
@@ -23,19 +24,10 @@ void setup()
 
   Serial.println(WiFi.localIP());
 
-  server.on("/turn_on", HTTP_GET, [](AsyncWebServerRequest *request) {
-    request->send(200, "text/plain", "Turning on the light");
-    Serial.println("Turning on the LED");
-    digitalWrite(pin, HIGH);
-  });
+  check = hello();
 
-  server.on("/goodbye", HTTP_GET, [](AsyncWebServerRequest *request) {
-    request->send(200, "text/plain", "Turning off the light");
-    Serial.println("Turning off the LED");
-    digitalWrite(pin, LOW);
-  });
-}
+  check = goodbye();
 
-void loop()
-{
-}
+  void loop()
+  {
+  }
