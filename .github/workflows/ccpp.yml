@@ -20,16 +20,48 @@ jobs:
     - name: make clean
       run: make clean
 
-# Below is some stuff from my example and also not from my example.
-#    - name: kompilera
-#      run: gcc main.c -o main
-#    - name: run_program
-#      run: ./main
-#    - name: configure
-#      run: ./configure
-#    - name: make
-#      run: make
-#    - name: make check
-#      run: make check
-#    - name: make distcheck
-#      run: make distcheck
+
+name: Create Release
+on: 
+    push:
+        create_release
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@master
+    - name: make
+      run: make
+      
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: true
+        prerelease: true
+        
+    - name: Get version
+      id: get_version
+      shell: bash
+      run: echo ::set-output name=version::$(git name-rev --name-only --tags HEAD)
+
+    - name: Create archive
+      shell: bash
+      run: |
+        mkdir artifact
+        7z a artifact/artifact.zip ./build/hello
+    - name: Upload release asset
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./artifact/artifact.zip
+        asset_name: task_simple_make-${{ steps.get_version.outputs.version }}.zip
+        asset_content_type: application/zip
