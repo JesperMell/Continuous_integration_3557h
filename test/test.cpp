@@ -1,4 +1,7 @@
 #include <unity.h>
+#include <Arduino.h>
+#include <WiFi.h>
+#include <ESPAsyncWebServer.h>
 
 void setUp()
 {
@@ -8,15 +11,21 @@ void tearDown()
 }
 void test_123hejhej(void)
 {
-    TEST_ASSERT_EQUAL_UINT8(1, 1);
-    TEST_ASSERT_EQUAL_UINT8(0, 0);
+    /*     SSID = linus iphone;
+    password = 12345678;
+    wificonnect(); */
+    TEST_ASSERT_EQUAL_UINT8(WL_CONNECTED(wifi.status())
 }
 
-int main(void)
+void setup()
+{
+    delay(1000);
+}
+
+void loop(void)
 {
     UNITY_BEGIN();
     RUN_TEST(test_123hejhej);
-    UNITY_END();
 
-    return 0;
+    UNITY_END();
 }
