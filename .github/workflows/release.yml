@@ -30,20 +30,19 @@ jobs:
 
 # Funkar inte
 
-#    - name: Create archive
-#      shell: bash
-#      run: |
-#        echo ls
-#        mkdir artifact
-#        7z a -r artifact/artifact.zip ./src
-#        - uses: actions/checkout@master
+    - name: Create archive
+      shell: bash
+      run: |
+        mkdir artifact
+        7z a -r artifact/artifact.zip ./src
+        - uses: actions/checkout@master
 
 # Funkar inte
 
-    - name: Archive Release
-      uses: thedoctor0/zip-release@master
-      with:
-        filename: 'artifact.zip'
+#    - name: Archive Release
+#      uses: thedoctor0/zip-release@master
+#      with:
+#        filename: 'artifact.zip'
 
     - name: echo
       run: ls -al
