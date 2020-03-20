@@ -40,10 +40,10 @@ jobs:
 
 # Funkar inte
 
-#    - name: Archive Release
-#      uses: thedoctor0/zip-release@master
-#      with:
-#        filename: 'release.zip'
+    - name: Archive Release
+      uses: thedoctor0/zip-release@master
+      with:
+        filename: 'artifact.zip'
 
     - name: echo
       run: ls -al
