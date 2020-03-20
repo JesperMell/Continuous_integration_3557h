@@ -35,7 +35,7 @@ jobs:
 #        mkdir artifact
 #        7z a -r artifact/artifact.zip ./src
 #        - uses: actions/checkout@master
-        
+    - uses: actions/checkout@create_release
     - name: Archive Release
       uses: thedoctor0/zip-release@master
       with:
