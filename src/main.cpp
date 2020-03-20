@@ -1,33 +1,45 @@
-// main.cpp
+  #include <module.h>
 
-#include "header.h"
+  /* **************************************************************** */
 
-extern const char *ssid = "ENTER SSID";
-extern const char *password = "ENTER PASSWORD";
-extern const int pin = 13;
+  const char *ssid = "PrivacyMi";
+  const char *password = "test12345";
+  extern const int pin = 13;
+  boolean check_hello = false;
+  boolean check_goodbye = false;
 
-boolean check = false;
-AsyncWebServer server(3000);
+  AsyncWebServer server(3000);
 
-void setup()
-{
-  Serial.begin(9600);
-  WiFi.begin(ssid, password);
-  pinMode(pin, OUTPUT);
-  server.begin();
-
-  while (WiFi.status() != WL_CONNECTED)
+  void setup()
   {
-    delay(1000);
-    Serial.println("Connecting to WiFi...");
+    Serial.begin(9600);
+
+    WiFi.begin(ssid, password);
+
+    pinMode(pin, OUTPUT);
+
+    server.begin();  
+
+    while (WiFi.status() != WL_CONNECTED)
+    {
+      delay(1000);
+      Serial.println("Connecting to WiFi...");
+    }  
+    
+    Serial.println(WiFi.localIP());  
+    
+    check_hello = hello(&server);  
+    if(check_hello == true){
+    Serial.println("Turning on the LED");
+    }
+    
+    check_goodbye = goodbye(&server);  
+      if(check_goodbye == true){
+    Serial.println("Turning off the LED");
+    }
+
   }
 
-  Serial.println(WiFi.localIP());
-
-  check = hello();
-
-  check = goodbye();
-
-  void loop()
-  {
-  }
+    void loop()
+    {
+    }
