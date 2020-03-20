@@ -28,27 +28,11 @@ jobs:
       shell: bash
       run: echo ::set-output name=version::$(git name-rev --name-only --tags HEAD)
 
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Zip Folder
       run: zip -r release.zip .
     - name: Release to Github
       run: echo "Release"
-# Funkar inte
-
-#    - name: Create archive
-#      shell: bash
-#      run: |
-#        echo ls
-#        mkdir artifact
-#        7z a -r artifact/artifact.zip ./src
-#        - uses: actions/checkout@master
-
-# Funkar inte
-
-#    - name: Archive Release
-#      uses: thedoctor0/zip-release@master
-#      with:
-#        filename: 'artifact.zip'
 
     - name: echo
       run: ls -al
