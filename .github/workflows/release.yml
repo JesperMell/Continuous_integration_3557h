@@ -1,18 +1,11 @@
 on:
   push:
-    branch:
-    - create_release
+    branches: [ create_release ]
     tags:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 name: Create Release
 
-
-on:
-  push:
-    branches: [ create_release ]
-  pull_request:
-    branches: [ create_release ]
 
 jobs:
   build:
