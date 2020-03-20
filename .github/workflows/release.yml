@@ -31,7 +31,7 @@ jobs:
     - name: Create archive
       shell: bash
       run: |
-        cd /testmake
+        cd ./testmake
         ls -la
         cd ..
         mkdir artifact
