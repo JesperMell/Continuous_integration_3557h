@@ -20,11 +20,10 @@ jobs:
     - name: make clean
       run: make clean
 
-
-name: Create Release
 on: 
     push:
-        create_release
+        branches:
+      - create_release
 jobs:
   build:
 
