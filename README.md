@@ -68,4 +68,4 @@ Create Release workflow badge:
 ![Create Release](https://github.com/JesperMell/Continuous_integration_3557h/workflows/Create%20Release/badge.svg)
 
 ## Contributors
-Jesper Mellquist
+Jesper Mellquist, Linus Larsson, Bassel Alnabhan, Patrik Gustafsson.
