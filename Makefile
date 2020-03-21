@@ -10,7 +10,7 @@ BINARY = hello
 BUILD = build
 TEST = test
 UNITY = libunity.a
-UNITYFOLDER = ./testmake/unity
+UNITYFOLDER = ./unity
 
 
 
@@ -62,7 +62,7 @@ $(TARGET_TEST): $(TESTOBJ) $(UNITY_TARGET)
 	$(LD) $(TESTOBJ) -L $(BUILD)/$(UNITYFOLDER) -lunity -o $(TARGET_TEST) #-lunity skulle kunna bytas mot UNITYOB
 
 $(UNITY_TARGET): $(UNITYOBJ)
-	ar rcs $(UNITY_TARGET) $(UNITYOBJ)
+	ar rcs $(UNITY_TARGET) $(UNITYOBJ) #arkivera unity
 
 ################
 # More targets #
