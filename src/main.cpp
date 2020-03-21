@@ -1,45 +1,106 @@
-  #include <module.h>
+#include <WiFi.h>
+#include <Arduino.h>
 
-  /* **************************************************************** */
+const char* ssid     = "SSID";
+const char* password = "PASSWD";
 
-  const char *ssid = "PrivacyMi";
-  const char *password = "test12345";
-  extern const int pin = 13;
-  boolean check_hello = false;
-  boolean check_goodbye = false;
+WiFiServer server(80);
 
-  AsyncWebServer server(3000);
+String header;
 
-  void setup()
-  {
-    Serial.begin(9600);
+String output13State = "off";
 
-    WiFi.begin(ssid, password);
+const int output13 = 13;
 
-    pinMode(pin, OUTPUT);
+void setup() {
+  
+  Serial.begin(115200);
+  
+  pinMode(output13, OUTPUT);
 
-    server.begin();  
+  digitalWrite(output13, LOW);
 
-    while (WiFi.status() != WL_CONNECTED)
-    {
-      delay(1000);
-      Serial.println("Connecting to WiFi...");
-    }  
-    
-    Serial.println(WiFi.localIP());  
-    
-    check_hello = hello(&server);  
-    if(check_hello == true){
-    Serial.println("Turning on the LED");
-    }
-    
-    check_goodbye = goodbye(&server);  
-      if(check_goodbye == true){
-    Serial.println("Turning off the LED");
-    }
-
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
   }
 
-    void loop()
-    {
+  Serial.println("");
+  Serial.println("WiFi connected.");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+  server.begin();
+}
+
+void loop(){
+  WiFiClient client = server.available();
+
+  if (client) {
+    Serial.println("New Client.");
+    String currentLine = "";
+    while (client.connected()) {
+      if (client.available()) {
+        char c = client.read();
+        Serial.write(c);
+        header += c;
+        if (c == '\n') {
+
+          if (currentLine.length() == 0) {
+
+            client.println("HTTP/1.1 200 OK");
+            client.println("Content-type:text/html");
+            client.println("Connection: close");
+            client.println();
+            
+            if (header.indexOf("GET /13/on") >= 0) {
+              Serial.println("PIN 13 on");
+              output13State = "on";
+              digitalWrite(output13, HIGH);
+            } else if (header.indexOf("GET /13/off") >= 0) {
+              Serial.println("PIN 13 off");
+              output13State = "off";
+              digitalWrite(output13, LOW);
+            }
+            
+
+            client.println("<!DOCTYPE html><html>");
+            client.println("<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
+            client.println("<link rel=\"icon\" href=\"data:,\">");
+            client.println("<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}");
+            client.println(".button { background-color: #4CAF50; border: none; color: white; padding: 16px 40px;");
+            client.println("text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}");
+            client.println(".button2 {background-color: #555555;}</style></head>");
+
+            client.println("<body><h1>Simple ESP32 Web Server - By the incredibles</h1>");
+            
+            client.println("<p>LED - State: " + output13State + "</p>");
+   
+            if (output13State=="off") {
+              client.println("<p><a href=\"/13/on\"><button class=\"button\">ON</button></a></p>");
+            } else {
+              client.println("<p><a href=\"/13/off\"><button class=\"button button2\">OFF</button></a></p>");
+            } 
+               
+            client.println("</body></html>");
+
+            client.println();
+            break;
+          } else {
+            currentLine = "";
+          }
+        } else if (c != '\r') {
+          currentLine += c;
+        }
+      }
     }
+
+    header = "";
+
+    client.stop();
+    Serial.println("Client disconnected.");
+    Serial.println("");
+  }
+}
