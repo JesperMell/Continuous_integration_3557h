@@ -1,15 +1,29 @@
 #ifndef MODULE_H_
 #define MODULE_H_
 
-#include <WiFi.h>
-#include <Arduino.h>
-#include <ESPAsyncWebServer.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <stdbool.h>
+
+typedef bool boolean;
+
+class AsyncWebServer
+{
+protected:
+public:
+    AsyncWebServer(uint16_t port)
+    {
+    }
+
+    void begin();
+    void end();
+};
 
 /* **************************************************************** */
 
-boolean hello(AsyncWebServer *server);
+bool hello(AsyncWebServer *server);
 
-boolean goodbye(AsyncWebServer *server);
+bool goodbye(AsyncWebServer *server);
 
 /* **************************************************************** */
 
