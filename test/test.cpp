@@ -1,47 +1,87 @@
 #include <unity.h>
 #include <module.h>
-#include <Arduino.h>
 
-/* **************************************************************** */
+extern const int pin = 13;
+static AsyncWebServer server(3000);
+static bool state = false;
 
-boolean hello(AsyncWebServer *server) {
-    return true;
+/**********************************Setup and teardown********************************* */
+
+void setUp()
+{
+
+    //posibly reset fake varables();
 }
 
-boolean goodbye(AsyncWebServer *server) {
-    return false;
+void tearDown()
+{
+}
+/* ************************Fake functions without hardware**************************************** */
+#ifdef WITH_HARDWARE
+boolean hello(AsyncWebServer *server)
+{
 }
 
-/* **************************************************************** */
+boolean goodbye(AsyncWebServer *server)
+{
+    state = false;
+    return state;
+}
 
-AsyncWebServer server(3000);
+#else
+/* **********************Fake functions with hardware *********************************** */
+bool hello(AsyncWebServer *server)
+{
+    state = true;
+    return state;
+}
 
-void test_hello(void) {
+bool goodbye(AsyncWebServer *server)
+{
+    state = false;
+    return state;
+}
+
+#endif
+/* ******************************Test cases********************************** */
+
+void test_hello(void)
+{
     TEST_ASSERT_EQUAL_INT(1, hello(&server));
 }
 
-void test_goodbye(void) {
+void test_goodbye(void)
+{
     TEST_ASSERT_EQUAL_INT(0, goodbye(&server));
 }
 
-/* **************************************************************** */
-
-void setup() {
-
+/* *******************************Running code********************************* */
+#ifdef WITH_HARDWARE
+void loop()
+{
+}
+void setup()
+{
     delay(2000);
+#else
+int main()
+{
+#endif
 
-    UNITY_BEGIN(); 
+#ifdef WITH_HARDWARE
+//rikta om till spionfunktioner om vi vill
+#else
+//rikta om till fakefunktioner
+#endif
+
+    UNITY_BEGIN();
 
     RUN_TEST(test_hello);
-    delay(500);
-
     RUN_TEST(test_goodbye);
-    delay(500);
 
+#ifdef WITH_HARDWARE
     UNITY_END();
-
-}
-
-void loop() {
- 
+#else
+    return UNITY_END();
+#endif
 }
