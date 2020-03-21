@@ -53,8 +53,9 @@ void spy_read(char *str)
 }
 bool spy_init(AsyncWebServer *server)
 {
-    init(server);
-    ;
+
+    state = init(server);
+    return state;
 }
 
 /* ******************************Test cases********************************** */
@@ -94,8 +95,8 @@ int main()
         //redirect to fake functions (no hardware available)
         .module_hello = fake_hello,
         .module_goodbye = fake_goodbye,
-        .module_init = fake_init,
-        .module_read = fake_read
+        .module_read = fake_read,
+        .module_init = fake_init
 #endif
     };
 
