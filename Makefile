@@ -6,7 +6,7 @@ DEFAULT_VARIABLES := $(.VARIABLES)
 
 CC = gcc
 LD = gcc
-BINARY = hello
+BINARY = main
 BUILD = build
 TEST = test
 UNITY = libunity.a
@@ -18,12 +18,12 @@ UNITYFOLDER = ./unity
 # Generated variables #
 #######################
 
-SRC = ./testmake/hello.c ./testmake/main.c
-OBJ = $(SRC:%.c=$(BUILD)/%.o)
+SRC = src/main.cpp lib/module.cpp
+OBJ = $(SRC:%.cpp=$(BUILD)/%.o)
 TARGET_BINARY = $(BUILD)/$(BINARY)
 
-TESTSRC= ./testmake/hello.c ./testmake/test.c
-TESTOBJ = $(TESTSRC:%.c=$(BUILD)/%.o)
+TESTSRC= ./lib/module.cpp ./test/test.cpp
+TESTOBJ = $(TESTSRC:%.cpp=$(BUILD)/%.o)
 TARGET_TEST = $(BUILD)/$(TEST)
 
 UNITYSRC = $(shell find $(UNITYFOLDER) -name "*.c")
@@ -52,7 +52,7 @@ clean:
 	
 
 ####################
-# Actually do this #
+# Actually do this (aka rules) #
 ####################
 
 $(TARGET_BINARY): $(OBJ)
@@ -71,7 +71,7 @@ $(UNITY_TARGET): $(UNITYOBJ)
 
 build/%.o: %.c
 	@[ -e $(dir $@) ] || mkdir -p $(dir $@) # Create build directory if it does not exist
-	$(CC) -c -o $@ -I ./testmake/unity $<
+	$(CC) -c -o $@ -I ./unity $<
 
 unity: $(TARGET_UNITY)
 
