@@ -39,6 +39,7 @@ all: $(TARGET_BINARY)
 
 clean:
 	rm -rf $(TARGET_BINARY)
+	rm -r $(BUILD)
 	rm -rf $(OBJ)
 	rm -rf $(UNITY_TARGET)
 	rm -rf $(UNITYOBJ)
