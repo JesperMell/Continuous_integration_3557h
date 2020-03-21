@@ -1,10 +1,9 @@
 #include <unity.h>
 #include <module.h>
 
-extern const int pin = 13;
 static AsyncWebServer server(3000);
 static bool state = false;
-
+static module_t *moduleptr;
 /**********************************Setup and teardown********************************* */
 
 void setUp()
@@ -16,43 +15,58 @@ void setUp()
 void tearDown()
 {
 }
+
 /* ************************Fake functions without hardware**************************************** */
-#ifdef WITH_HARDWARE
-boolean hello(AsyncWebServer *server)
-{
-}
-
-boolean goodbye(AsyncWebServer *server)
-{
-    state = false;
-    return state;
-}
-
-#else
-/* **********************Fake functions with hardware *********************************** */
-bool hello(AsyncWebServer *server)
+boolean fake_hello(AsyncWebServer *server)
 {
     state = true;
     return state;
 }
 
-bool goodbye(AsyncWebServer *server)
+boolean fake_goodbye(AsyncWebServer *server)
 {
     state = false;
     return state;
 }
+void fake_read(char *str) {}
+bool fake_init(AsyncWebServer *server)
+{
+    state = true;
+    return state;
+}
 
-#endif
+/* **********************Fake functions with hardware aka spy functions*********************************** */
+bool spy_hello(AsyncWebServer *server)
+{
+    init(server);
+    return hello(server);
+}
+
+bool spy_goodbye(AsyncWebServer *server)
+{
+    init(server);
+    return goodbye(server);
+}
+void spy_read(char *str)
+{
+    read(str);
+}
+bool spy_init(AsyncWebServer *server)
+{
+    init(server);
+    ;
+}
+
 /* ******************************Test cases********************************** */
 
 void test_hello(void)
 {
-    TEST_ASSERT_EQUAL_INT(1, hello(&server));
+    TEST_ASSERT_EQUAL_INT(1, moduleptr->module_hello(&server));
 }
 
 void test_goodbye(void)
 {
-    TEST_ASSERT_EQUAL_INT(0, goodbye(&server));
+    TEST_ASSERT_EQUAL_INT(0, moduleptr->module_goodbye(&server));
 }
 
 /* *******************************Running code********************************* */
@@ -68,11 +82,24 @@ int main()
 {
 #endif
 
+    module_t mod = {
 #ifdef WITH_HARDWARE
-//rikta om till spionfunktioner om vi vill
+        //redirect to spy functions (with hardware available)
+        .module_hello = spy_hello,
+        .module_goodbye = spy_goodbye,
+        .module_read = spy_read,
+        .module_init = spy_init
+
 #else
-//rikta om till fakefunktioner
+        //redirect to fake functions (no hardware available)
+        .module_hello = fake_hello,
+        .module_goodbye = fake_goodbye,
+        .module_init = fake_init,
+        .module_read = fake_read
 #endif
+    };
+
+    moduleptr = &mod;
 
     UNITY_BEGIN();
 

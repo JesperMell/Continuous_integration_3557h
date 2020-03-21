@@ -19,11 +19,21 @@ public:
     void end();
 };
 
+typedef struct
+{
+    boolean (*module_hello)(AsyncWebServer *);
+    boolean (*module_goodbye)(AsyncWebServer *);
+    void (*module_read)(char *);
+    boolean (*module_init)(AsyncWebServer *);
+
+} module_t;
+
 /* **************************************************************** */
 
-bool hello(AsyncWebServer *server);
-
-bool goodbye(AsyncWebServer *server);
+boolean hello(AsyncWebServer *server);
+boolean goodbye(AsyncWebServer *server);
+boolean read(char *str);
+boolean init(AsyncWebServer *);
 
 /* **************************************************************** */
 

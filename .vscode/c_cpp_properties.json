@@ -6,7 +6,6 @@
         {
             "name": "Win32",
             "includePath": [
-                "C:/Users/Linus Larsson/Documents/utb/CI/Continuous_integration_3557h/include",
                 "C:/Users/Linus Larsson/Documents/utb/CI/Continuous_integration_3557h/src",
                 "C:/Users/Linus Larsson/Documents/utb/CI/Continuous_integration_3557h/lib/module",
                 "C:/Users/Linus Larsson/Documents/utb/CI/Continuous_integration_3557h/.pio/libdeps/featheresp32/ESP Async WebServer_ID306/src",
@@ -101,7 +100,6 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "C:/Users/Linus Larsson/Documents/utb/CI/Continuous_integration_3557h/include",
                     "C:/Users/Linus Larsson/Documents/utb/CI/Continuous_integration_3557h/src",
                     "C:/Users/Linus Larsson/Documents/utb/CI/Continuous_integration_3557h/lib/module",
                     "C:/Users/Linus Larsson/Documents/utb/CI/Continuous_integration_3557h/.pio/libdeps/featheresp32/ESP Async WebServer_ID306/src",
