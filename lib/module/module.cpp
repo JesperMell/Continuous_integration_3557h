@@ -10,6 +10,7 @@ boolean hello(AsyncWebServer *server)
     request->send(200, "text/plain", "Turning on the light");
 
     digitalWrite(pin, HIGH);
+    Serial.println("Turning on the LED");
   });
   boolean check_hello = digitalRead(pin);
   return check_hello;
@@ -20,6 +21,7 @@ boolean goodbye(AsyncWebServer *server)
   server->on("/goodbye", HTTP_GET, [](AsyncWebServerRequest *request) {
     request->send(200, "text/plain", "Turning off the light");
     digitalWrite(pin, LOW);
+    Serial.println("Turning off the LED");
   });
   boolean check_goodbye = !digitalRead(pin);
   return check_goodbye;
