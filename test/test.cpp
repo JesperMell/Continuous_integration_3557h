@@ -19,7 +19,7 @@ void tearDown()
 /* ************************Fake functions without hardware**************************************** */
 boolean fake_hello(AsyncWebServer *server)
 {
-    state = true;
+    state = false;
     return state;
 }
 
@@ -61,7 +61,7 @@ bool spy_init(AsyncWebServer *server)
 
 void test_hello(void)
 {
-    TEST_ASSERT_EQUAL_INT(1, moduleptr->module_hello(&server));
+    TEST_ASSERT_EQUAL_INT(0, moduleptr->module_hello(&server));
 }
 
 void test_goodbye(void)
