@@ -28,7 +28,7 @@ TARGET_TEST = $(BUILD)/$(TEST)
 
 UNITYSRC = $(shell find $(UNITYFOLDER) -name "*.c")
 UNITYOBJ = $(UNITYSRC:./%.c=$(BUILD)/%.o)
-UNITY_TARGET = $(BUILD)/$(UNITYFOLDER)/$(UNITY)
+UNITY_TARGET = $(BUILD)/unity/$(UNITY)
 
 
 ###########
@@ -57,10 +57,10 @@ clean:
 ####################
 
 $(TARGET_BINARY): $(OBJ)
-	$(LD) -o $(TARGET_BINARY) $(OBJ) #länkar alla objektfiler till en exekverbar binärfil
+	$(LD) -I ./lib/module -o $(TARGET_BINARY) $(OBJ) #länkar alla objektfiler till en exekverbar binärfil
 
 $(TARGET_TEST): $(TESTOBJ) $(UNITY_TARGET)
-	$(LD) $(TESTOBJ) -L $(BUILD)/$(UNITYFOLDER) -lunity -o $(TARGET_TEST) #-lunity skulle kunna bytas mot UNITYOB
+	$(LD) $(TESTOBJ) -L $(BUILD)/$(UNITYFOLDER) -lunity -I ./test -o $(TARGET_TEST) #-lunity skulle kunna bytas mot UNITYOB
 
 $(UNITY_TARGET): $(UNITYOBJ)
 	ar rcs $(UNITY_TARGET) $(UNITYOBJ) #arkivera unity
@@ -70,9 +70,9 @@ $(UNITY_TARGET): $(UNITYOBJ)
 ################
 
 
-build/%.o: %.c
+build/%.o: %.cpp
 	@[ -e $(dir $@) ] || mkdir -p $(dir $@) # Create build directory if it does not exist
-	$(CC) -c -o $@ -I ./unity $<
+	$(CC) -c -o $@ -I ./unity  $<
 
 unity: $(TARGET_UNITY)
 

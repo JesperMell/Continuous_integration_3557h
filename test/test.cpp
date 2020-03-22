@@ -53,15 +53,7 @@ void spy_read(char *str)
 }
 bool spy_init(AsyncWebServer *server)
 {
-#ifdef WITH_HARDWARE
-    Serial.begin(9600);
-    pinMode(pin, OUTPUT);
-    delay(3000);
-    init(server);
-    Serial.println(WiFi.localIP());
-#else
-    init(server);
-#endif
+
     return state;
 }
 
