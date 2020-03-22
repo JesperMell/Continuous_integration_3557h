@@ -38,14 +38,14 @@ bool fake_init(AsyncWebServer *server)
 /* **********************Fake functions with hardware aka spy functions*********************************** */
 bool spy_hello(AsyncWebServer *server)
 {
-    init(server);
-    return hello(server);
+    hello(server);
+    return state;
 }
 
 bool spy_goodbye(AsyncWebServer *server)
 {
-    init(server);
-    return goodbye(server);
+    goodbye(server);
+    return state;
 }
 void spy_read(char *str)
 {
@@ -53,8 +53,15 @@ void spy_read(char *str)
 }
 bool spy_init(AsyncWebServer *server)
 {
-
-    state = init(server);
+#ifdef WITH_HARDWARE
+    Serial.begin(9600);
+    pinMode(pin, OUTPUT);
+    delay(3000);
+    init(server);
+    Serial.println(WiFi.localIP());
+#else
+    init(server);
+#endif
     return state;
 }
 
