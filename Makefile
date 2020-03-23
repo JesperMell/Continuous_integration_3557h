@@ -59,7 +59,7 @@ $(TARGET_BINARY):
 	platformio run
 
 $(TARGET_TEST): $(TESTOBJ) $(UNITY_TARGET)
-	$(LD) $(TESTOBJ) $(UNITYOBJ) -o $(TARGET_TEST) -lm -lgcc
+	$(LD) $(TESTOBJ) $(UNITYOBJ) -o $(TARGET_TEST) -fopenmp
 
 
 $(UNITY_TARGET): $(UNITYOBJ)
