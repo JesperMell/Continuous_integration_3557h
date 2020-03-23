@@ -9,7 +9,7 @@ LD = gcc
 BINARY = main
 BUILD = build
 TEST = test
-UNITY = unity.o
+UNITY = unity
 UNITYFOLDER = ./unity
 
 
@@ -26,9 +26,9 @@ TESTSRC= test/test.cpp
 TESTOBJ = $(TESTSRC:%.cpp=$(BUILD)/%.o)
 TARGET_TEST = $(BUILD)/$(TEST)
 
-UNITYSRC = $(shell find $(UNITYFOLDER) -name "*.c")
+UNITYSRC = $(UNITYFOLDER)/unity.c $(UNITYFOLDER)/unity_memory.c
 UNITYOBJ = $(UNITYSRC:./%.c=$(BUILD)/%.o)
-UNITY_TARGET = $(BUILD)/$(UNITYFOLDER)/$(UNITY)
+UNITY_TARGET = $(BUILD)/$(UNITY)/$(UNITY)
 
 
 ###########
@@ -56,15 +56,14 @@ clean:
 # Actually do this (aka rules) #
 ####################
 
-$(TARGET_BINARY): $(OBJ)
-	$(LD) -o $(TARGET_BINARY) $(OBJ) #länkar alla objektfiler till en exekverbar binärfil
+$(TARGET_BINARY):
+	platformio run
 
 $(TARGET_TEST): $(TESTOBJ) $(UNITY_TARGET)
-	$(LD) $(TESTOBJ) -L $(BUILD)/$(UNITYOBJ/$(UNITY)-o $(TARGET_TEST) 
-	#-lunity skulle kunna bytas mot UNITYOB
+	$(LD) $(TESTOBJ) $(UNITYOBJ) -o $(TARGET_TEST) 
+
 
 $(UNITY_TARGET): $(UNITYOBJ)
-	#ar rcs $(UNITY_TARGET) $(UNITYOBJ) #arkivera unity
 
 ################
 # More targets #
@@ -76,7 +75,7 @@ build/%.o: %.cpp
 
 build/%.o: %.c
 	@[ -e $(dir $@) ] || mkdir -p $(dir $@) # Create build directory if it does not exist
-	$(CC) -c -o $@ -I ./unity $<
+	$(CC) -c -o $@ -I ./unity -I ./test $<
 
 unity: $(UNITY_TARGET)
 
