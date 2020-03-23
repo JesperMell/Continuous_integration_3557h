@@ -1,4 +1,9 @@
 # Continuous_integration_3557h
+## Related documents:
+- Workflow/Presentation: 
+https://docs.google.com/document/d/1b-6UkOfVD8PuoY2AAAMQrq8wWzIracWZjEjaBTX_6nA/edit#
+
+
 ## By the incredibles
 The focus of the assignment is on the testing, CI, CD and Makefiles.
 The project shall use automatic tests, CI, CD, Makefiles and at least some tests
@@ -40,11 +45,26 @@ These are suggestions on assignments which your group may choose.
   - Commands for storing and retrieving data from files
   - Login
   - Add user/remove user
-  
-  
-  
-  
-  
-  
-  python workflow badge:
-  ![Python application](https://github.com/JesperMell/Continuous_integration_3557h/workflows/Python%20application/badge.svg)
+   
+ ## Workflow (Priorites)
+ 
+ - High level Reqs
+ - Workflow
+ - CI + makefile
+ - Continues Delivery
+ - Low Level Requirements
+ - Developing
+ - Expanding the application
+
+
+C test workflow badge:
+![C/C++ CI](https://github.com/JesperMell/Continuous_integration_3557h/workflows/C/C++%20CI/badge.svg)
+
+python workflow badge:
+![Python application](https://github.com/JesperMell/Continuous_integration_3557h/workflows/Python%20application/badge.svg)
+
+Create Release workflow badge:
+![Create Release](https://github.com/JesperMell/Continuous_integration_3557h/workflows/Create%20Release/badge.svg)
+
+## Contributors
+Jesper Mellquist, Linus Larsson, Bassel Alnabhan, Patrik Gustafsson.
