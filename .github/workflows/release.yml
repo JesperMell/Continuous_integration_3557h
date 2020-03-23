@@ -33,7 +33,13 @@ jobs:
       run: zip -r release.zip ./src ./testmake ./rest_api ./lib ./test
     - name: Release to Github
       run: echo "Release"
-
+    
+    - name: Set up Python
+      uses: actions/setup-python@v1
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install platformio
         
     - name: Upload release asset
       uses: actions/upload-release-asset@v1.0.1
