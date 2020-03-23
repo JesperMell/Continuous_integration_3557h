@@ -10,8 +10,14 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
-
+    - name: Set up Python
+      uses: actions/setup-python@v1
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install platformio
+        
     - name: make test
-      run: apt-get install python3-setuptools && pip3 install -U platformio && platform update && make test
+      run: make test
     - name: make clean
       run: make clean
