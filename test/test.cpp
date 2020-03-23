@@ -15,6 +15,15 @@ void setUp()
 void tearDown()
 {
 }
+#ifndef WITH_HARDWARE
+boolean hello(AsyncWebServer *server)
+{
+}
+boolean goodbye(AsyncWebServer *server) {}
+boolean read(char *str) {}
+boolean init(AsyncWebServer *) {}
+#else
+#endif
 
 /* ************************Fake functions without hardware**************************************** */
 boolean fake_hello(AsyncWebServer *server)
