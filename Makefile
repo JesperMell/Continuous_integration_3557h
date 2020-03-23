@@ -70,11 +70,11 @@ $(UNITY_TARGET): $(UNITYOBJ)
 
 build/%.o: %.cpp
 	@[ -e $(dir $@) ] || mkdir -p $(dir $@) # Create build directory if it does not exist
-	$(CC) -c -I ./test -I ./unity -o $@ $<
+	$(CC) -c -I ./test -I ./unity -o $@ -lm $<
 
 build/%.o: %.c
 	@[ -e $(dir $@) ] || mkdir -p $(dir $@) # Create build directory if it does not exist
-	$(CC) -c -o $@ -I ./unity -I ./test $<
+	$(CC) -c -o $@ -lm -I ./unity -I ./test $<
 
 unity: $(UNITY_TARGET)
 
