@@ -6,11 +6,11 @@ DEFAULT_VARIABLES := $(.VARIABLES)
 
 CC = gcc
 LD = gcc
-BINARY = hello
+BINARY = main
 BUILD = build
 TEST = test
-UNITY = libunity.a
-UNITYFOLDER = ./testmake/unity
+UNITY = unity
+UNITYFOLDER = ./unity
 
 
 
@@ -18,17 +18,17 @@ UNITYFOLDER = ./testmake/unity
 # Generated variables #
 #######################
 
-SRC = ./testmake/hello.c ./testmake/main.c
-OBJ = $(SRC:%.c=$(BUILD)/%.o)
+SRC = src/main.cpp lib/module.cpp
+OBJ = $(SRC:%.cpp=$(BUILD)/%.o)
 TARGET_BINARY = $(BUILD)/$(BINARY)
 
-TESTSRC= ./testmake/hello.c ./testmake/test.c
-TESTOBJ = $(TESTSRC:%.c=$(BUILD)/%.o)
+TESTSRC= test/test.cpp
+TESTOBJ = $(TESTSRC:%.cpp=$(BUILD)/%.o)
 TARGET_TEST = $(BUILD)/$(TEST)
 
-UNITYSRC = $(shell find $(UNITYFOLDER) -name "*.c")
+UNITYSRC = $(UNITYFOLDER)/unity.c $(UNITYFOLDER)/unity_memory.c
 UNITYOBJ = $(UNITYSRC:./%.c=$(BUILD)/%.o)
-UNITY_TARGET = $(BUILD)/$(UNITYFOLDER)/$(UNITY)
+UNITY_TARGET = $(BUILD)/$(UNITY)/$(UNITY)
 
 
 ###########
@@ -39,6 +39,7 @@ all: $(TARGET_BINARY)
 
 clean:
 	rm -rf $(TARGET_BINARY)
+	rm -r $(BUILD)
 	rm -rf $(OBJ)
 	rm -rf $(UNITY_TARGET)
 	rm -rf $(UNITYOBJ)
@@ -52,28 +53,31 @@ clean:
 	
 
 ####################
-# Actually do this #
+# Actually do this (aka rules) #
 ####################
 
-$(TARGET_BINARY): $(OBJ)
-	$(LD) -o $(TARGET_BINARY) $(OBJ) #länkar alla objektfiler till en exekverbar binärfil
+$(TARGET_BINARY):
+	platformio run
 
 $(TARGET_TEST): $(TESTOBJ) $(UNITY_TARGET)
-	$(LD) $(TESTOBJ) -L $(BUILD)/$(UNITYFOLDER) -lunity -o $(TARGET_TEST) #-lunity skulle kunna bytas mot UNITYOB
+	$(LD) $(TESTOBJ) $(UNITYOBJ) -o $(TARGET_TEST) 
+
 
 $(UNITY_TARGET): $(UNITYOBJ)
-	ar rcs $(UNITY_TARGET) $(UNITYOBJ)
 
 ################
 # More targets #
 ################
 
+build/%.o: %.cpp
+	@[ -e $(dir $@) ] || mkdir -p $(dir $@) # Create build directory if it does not exist
+	$(CC) -c -I ./test -I ./unity -o $@ $<
 
 build/%.o: %.c
 	@[ -e $(dir $@) ] || mkdir -p $(dir $@) # Create build directory if it does not exist
-	$(CC) -c -o $@ -I ./testmake/unity $<
+	$(CC) -c -o $@ -I ./unity -I ./test $<
 
-unity: $(TARGET_UNITY)
+unity: $(UNITY_TARGET)
 
 	
 test: $(TARGET_TEST)
