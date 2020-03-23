@@ -18,13 +18,13 @@ UNITYFOLDER = ./unity
 # Generated variables #
 #######################
 
-SRC = src/main.cpp lib/module.cpp
+SRC = src/main.cpp lib/module/module.cpp
 OBJ = $(SRC:%.cpp=$(BUILD)/%.o)
 TARGET_BINARY = $(BUILD)/$(BINARY)
 
 TESTSRC= test/test.cpp
 TESTOBJ = $(TESTSRC:%.cpp=$(BUILD)/%.o)
-TARGET_TEST = $(BUILD)/$(TEST)
+TARGET_TEST = $(BUILD)/$(TEST)/$(TEST)
 
 UNITYSRC = $(UNITYFOLDER)/unity.c $(UNITYFOLDER)/unity_memory.c
 UNITYOBJ = $(UNITYSRC:./%.c=$(BUILD)/%.o)
@@ -83,7 +83,7 @@ test: $(TARGET_TEST)
 	$(TARGET_TEST)
 
 
-.PHONY: all clean test
+.PHONY: all clean test $(UNITY_TARGET)
 
 
 
