@@ -9,7 +9,7 @@ LD = gcc
 BINARY = main
 BUILD = build
 TEST = test
-UNITY = libunity.a
+UNITY = unity.o
 UNITYFOLDER = ./unity
 
 
@@ -22,7 +22,7 @@ SRC = src/main.cpp lib/module.cpp
 OBJ = $(SRC:%.cpp=$(BUILD)/%.o)
 TARGET_BINARY = $(BUILD)/$(BINARY)
 
-TESTSRC= lib/module/module.cpp test/test.cpp
+TESTSRC= test/test.cpp
 TESTOBJ = $(TESTSRC:%.cpp=$(BUILD)/%.o)
 TARGET_TEST = $(BUILD)/$(TEST)
 
@@ -60,10 +60,11 @@ $(TARGET_BINARY): $(OBJ)
 	$(LD) -o $(TARGET_BINARY) $(OBJ) #länkar alla objektfiler till en exekverbar binärfil
 
 $(TARGET_TEST): $(TESTOBJ) $(UNITY_TARGET)
-	$(LD) $(TESTOBJ) -L $(BUILD)/$(UNITYFOLDER) -lunity -o $(TARGET_TEST) #-lunity skulle kunna bytas mot UNITYOB
+	$(LD) $(TESTOBJ) -L $(BUILD)/$(UNITYOBJ/$(UNITY)-o $(TARGET_TEST) 
+	#-lunity skulle kunna bytas mot UNITYOB
 
 $(UNITY_TARGET): $(UNITYOBJ)
-	ar rcs $(UNITY_TARGET) $(UNITYOBJ) #arkivera unity
+	#ar rcs $(UNITY_TARGET) $(UNITYOBJ) #arkivera unity
 
 ################
 # More targets #
@@ -71,13 +72,13 @@ $(UNITY_TARGET): $(UNITYOBJ)
 
 build/%.o: %.cpp
 	@[ -e $(dir $@) ] || mkdir -p $(dir $@) # Create build directory if it does not exist
-	g++ -c -I ./test/ -o $@ -I ./unity $<
+	$(CC) -c -I ./test -I ./unity -o $@ $<
 
 build/%.o: %.c
 	@[ -e $(dir $@) ] || mkdir -p $(dir $@) # Create build directory if it does not exist
 	$(CC) -c -o $@ -I ./unity $<
 
-unity: $(TARGET_UNITY)
+unity: $(UNITY_TARGET)
 
 	
 test: $(TARGET_TEST)
