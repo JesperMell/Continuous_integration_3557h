@@ -10,10 +10,6 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
-    - name: echo
-      run: echo 'Something was pushed'
-    - name: make
-      run: make
 
     - name: make test
       run: pip install -U platformio && platform update && make test
