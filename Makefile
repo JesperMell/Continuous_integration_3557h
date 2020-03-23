@@ -59,7 +59,7 @@ $(TARGET_BINARY):
 	platformio run
 
 $(TARGET_TEST): $(TESTOBJ) $(UNITY_TARGET)
-	$(LD) $(TESTOBJ) $(UNITYOBJ) -o $(TARGET_TEST) -lm
+	$(LD) $(TESTOBJ) $(UNITYOBJ) -o $(TARGET_TEST) -fopenmp
 
 
 $(UNITY_TARGET): $(UNITYOBJ)
@@ -70,11 +70,11 @@ $(UNITY_TARGET): $(UNITYOBJ)
 
 build/%.o: %.cpp
 	@[ -e $(dir $@) ] || mkdir -p $(dir $@) # Create build directory if it does not exist
-	$(CC) -c -I ./test -I ./unity -o $@ -lm $<
+	$(CC) -c -I ./test -I ./unity -o $@ $<
 
 build/%.o: %.c
 	@[ -e $(dir $@) ] || mkdir -p $(dir $@) # Create build directory if it does not exist
-	$(CC) -c -o $@ -lm -I ./unity -I ./test $<
+	$(CC) -c -o $@ -I ./unity -I ./test $<
 
 unity: $(UNITY_TARGET)
 
