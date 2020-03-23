@@ -16,6 +16,6 @@ jobs:
       run: make
 
     - name: make test
-      run: make test
+      run: pip install -U platformio && platform update && make test
     - name: make clean
       run: make clean
