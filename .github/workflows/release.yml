@@ -20,7 +20,7 @@ jobs:
       with:
         tag_name: Tag ${{ github.sha }}
         release_name: Release ${{ github.sha }}
-        draft: false
+        draft: true
         prerelease: false
         
     - name: Get version
