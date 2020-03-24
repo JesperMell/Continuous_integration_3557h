@@ -5,7 +5,7 @@ DEFAULT_VARIABLES := $(.VARIABLES)
 ###########################
 
 CC = gcc
-LD = gcc
+LD = g++
 BINARY = main
 BUILD = build
 TEST = test
@@ -59,7 +59,7 @@ $(TARGET_BINARY):
 	platformio run
 
 $(TARGET_TEST): $(TESTOBJ) $(UNITY_TARGET)
-	$(LD) $(TESTOBJ) $(UNITYOBJ) -o $(TARGET_TEST) -fopenmp
+	$(LD) $(TESTOBJ) $(UNITYOBJ) -o $(TARGET_TEST)
 
 
 $(UNITY_TARGET): $(UNITYOBJ)
