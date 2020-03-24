@@ -45,8 +45,7 @@ These are suggestions on assignments which your group may choose.
   - Commands for storing and retrieving data from files
   - Login
   - Add user/remove user
-  
- 
+   
  ## Workflow (Priorites)
  
  - High level Reqs
@@ -56,6 +55,9 @@ These are suggestions on assignments which your group may choose.
  - Low Level Requirements
  - Developing
  - Expanding the application
+ 
+## Upcoming features:
+- Make python read from Serial ESP32.
 
 
 C test workflow badge:
