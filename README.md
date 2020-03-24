@@ -45,8 +45,7 @@ These are suggestions on assignments which your group may choose.
   - Commands for storing and retrieving data from files
   - Login
   - Add user/remove user
-  
- 
+   
  ## Workflow (Priorites)
  
  - High level Reqs
